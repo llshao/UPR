@@ -13,7 +13,7 @@ gc.enable()
 #"""
 #name = input("Enter file:")
 #if len(name) < 1 : name = "part1.pcn"
-filename = "part5.pcn"
+filename = "part1.pcn"
 ## Initilize PCN inst and read PCNs from text
 UPR=PCN()
 UPR.read_pcn(filename)

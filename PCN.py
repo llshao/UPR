@@ -78,7 +78,7 @@ class PCN:
                 Parsedl[2*(abs(int(word))-1):2*abs(int(word))]=0b10## Be careful [lb,up], where up is excluded
             else:
                 Parsedl[2*(abs(int(word))-1):2*abs(int(word))]=0b01
-        return([int(linesplit[0]),Parsedl])   
+        return [int(linesplit[0]),Parsedl]   
 
 ####################################################################
 #######################Find the binate Variabel#####################
@@ -96,14 +96,14 @@ class PCN:
             max_index=T_C.index(max(T_C))
             print('Unate Find',max_index)
             print(self.PCN_list)
-            return(max_index)
+            return max_index
         else:
             binate_index=[i for i, j in enumerate(UorNot) if j == False]
             binate_TC=[T_C[i] for i in binate_index]
             min_index=binate_TC.index(min(binate_TC))
             print('Binate find',binate_index,binate_index[min_index])
             print(self.PCN_list)
-            return(binate_index[min_index])
+            return binate_index[min_index]
             
     def TC_cal(self) :
         tc=list([0])*self.Var_num
@@ -113,7 +113,7 @@ class PCN:
             for index in range(self.Var_num): # range [0, 1, 2...] start from 0
                 tc[index]=tc[index]+int(lstmp[2*index:2*index+2]==BitArray('0b01'))-int(lstmp[2*index:2*index+2]==BitArray('0b10'))
         tc_abs=[abs(number) for number in tc]
-        return(tc_abs)
+        return tc_abs
         
     def UnateJudge(self) :
         unateOrnot=BitArray('0b00')*self.Var_num
@@ -128,7 +128,7 @@ class PCN:
                 unateRes[index]=False
 #            if DontCare[2*index:2*index+2]==BitArray('0b11'):
 #                DontCareRes[index]=True
-        return(unateRes)
+        return unateRes
 ##########################################################################
         ############## Boolean Operation of the PCN lists##############
     def ANDX(self,Xindex):
@@ -179,13 +179,13 @@ class PCN:
                 self.PCN_num=1
 #                print(self.PCN_list)
 #                print('End Check')
-                return(True)## indicate it is simple enough to return
+                return True ## indicate it is simple enough to return
             if self.PCN_list[0][0]==0:
                 self.PCN_list=list()
                 self.PCN_num=0
 #                print(self.PCN_list)
 #                print('End Check')
-                return(True)
+                return True
             temp=list()
             temp_num=0
             for index in range(self.Var_num):
@@ -198,7 +198,7 @@ class PCN:
             self.PCN_num=temp_num
 #            print(self.PCN_list)
 #            print('End Check')
-            return(True)
+            return True 
                         
         else:
             if self.PCN_list[0][1]==self.PCN_list[1][1]:## remove redundant
@@ -210,10 +210,10 @@ class PCN:
                     self.PCN_num=0
     #                print(self.PCN_list)
     #                print('End Check')
-                    return(True)
+                    return True 
             print(self.PCN_list)
             print('End Check')
-            return(False)## indicate it is still too complex
+            return False ## indicate it is still too complex
 #############################################################
 ###################### P/NCofactor ##########################
     def PCofactor(self, Xindex):
@@ -233,14 +233,14 @@ class PCN:
                     temp.PCN_list=[[0,BitArray('0b11')*self.Var_num]]
 #                    print(temp.PCN_list)
 #                    print('END Pfactor, PCN#',temp.PCN_num)
-                    return(temp)
+                    return temp
                 temp.PCN_list.append(temp_line)
             else:
                 temp.PCN_num-=1
 #                print('PCN_num',self.PCN_num,temp.PCN_num)
 #        print(temp.PCN_list)
 #        print('END Pfactor, PCN#',temp.PCN_num)
-        return(temp)
+        return temp
         
     def NCofactor(self, Xindex):
 #        print('Ncofactor')
@@ -258,13 +258,13 @@ class PCN:
                     temp.PCN_list=[[0,BitArray('0b11')*self.Var_num]]
 #                    print(temp.PCN_list)
 #                    print('END Nfactor, PCN#', temp.PCN_num)
-                    return(temp)
+                    return temp
                 temp.PCN_list.append(temp_line)
             else:
                 temp.PCN_num-=1
 #        print(temp.PCN_list)
 #        print('END Nfactor, PCN#', temp.PCN_num)
-        return(temp)
+        return temp
 #################################################
                 ##### Complment ######
     def Complement(self):
@@ -273,7 +273,7 @@ class PCN:
         if self.PCN_CHECK():
             print('End Comp',self.PCN_list)
             gc.collect()
-            return()
+            return None
         else:
             binate_index=self.binateFind()
             print('Binate_index',binate_index)
@@ -293,4 +293,4 @@ class PCN:
             del Pfactor
             del Nfactor
             gc.collect()
-            return()
+            return None
